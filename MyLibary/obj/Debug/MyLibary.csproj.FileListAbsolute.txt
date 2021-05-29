@@ -1,0 +1,12 @@
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\MyLibary.dll.config
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\MyLibary.dll
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\MyLibary.pdb
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\EntityFramework.dll
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\EntityFramework.SqlServer.dll
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\EntityFramework.xml
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\bin\Debug\EntityFramework.SqlServer.xml
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\obj\Debug\MyLibary.csproj.CoreCompileInputs.cache
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\obj\Debug\MyLibary.csproj.CopyComplete
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\obj\Debug\MyLibary.dll
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\obj\Debug\MyLibary.pdb
+E:\1.Study\TH C#\30KiemTra\WebShop\MyLibary\obj\Debug\MyLibary.csprojAssemblyReference.cache

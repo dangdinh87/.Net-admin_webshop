@@ -1,0 +1,39 @@
+﻿@model MyLibary.Model.SanPham
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa sản phẩm</h2>
+<hr />
+<h3>Bạn có chắc chắn muốn xóa ?</h3>
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            ID sản phẩm
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt>
+            Tên Sản Phẩm
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> 
+            @Html.ActionLink("Quay Lại", "Index")
+        </div>
+    }
+</div>

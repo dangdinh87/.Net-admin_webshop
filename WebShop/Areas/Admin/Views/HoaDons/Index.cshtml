@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MyLibary.Model.HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Sách Hóa Đơn</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Mã Hóa Đơn
+        </th>
+        <th>
+            Thời Gian
+        </th>
+        <th>
+            Người Mua
+        </th>
+        <th>Hành Động</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NguoiDung.TenNV)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayMua)
+    </td>
+    <td>
+        @Html.ActionLink("Xóa", "Delete", new { id = item.id })
+    </td>
+</tr>
+}
+
+</table>
