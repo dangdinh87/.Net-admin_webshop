@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MyLibary.Model;
+using ModelEF.Model;
 
 namespace WebShop.Areas.Admin.Controllers
 {
     public class DanhMucsController : Controller
     {
-        private WebShopDBContext db = new WebShopDBContext();
+        private Model1 db = new Model1();
 
         // GET: Admin/DanhMucs
         public ActionResult Index()

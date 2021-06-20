@@ -1,4 +1,4 @@
-﻿@model MyLibary.Model.HoaDon
+﻿@model ModelEF.Model.HoaDon
 
 @{
     ViewBag.Title = "Details";
@@ -12,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung.TenNV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung.TenNV)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.NgayMua)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NgayMua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KhachHang_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhachHang_Id)
         </dd>
 
     </dl>

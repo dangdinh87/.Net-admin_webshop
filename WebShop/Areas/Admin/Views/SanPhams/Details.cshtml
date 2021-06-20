@@ -1,14 +1,14 @@
-﻿@model MyLibary.Model.SanPham
+﻿@model ModelEF.Model.SanPham
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thông tin chi tiết</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Sản Phẩm</h4>
+    <h4>SanPham</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -31,7 +31,7 @@
             Mô Tả Sản Phẩm
         </dt>
 
-        <dd style="max-width:300px">
+        <dd>
             @Html.DisplayFor(model => model.MoTa)
         </dd>
 
@@ -48,20 +48,28 @@
         </dt>
 
         <dd>
-            <img style="width:150px;height:150px" src=" @Html.DisplayFor(model => model.HinhAnh)" alt="Alternate Text" />
+            <img src="@Html.DisplayFor(model => model.HinhAnh)" style="width:500px;object-fit:cover"/>
         </dd>
 
         <dt>
-            Số Lượng Sản Phẩm
+            Số Lượng Còn
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SoLuong)
         </dd>
 
+        <dt>
+            Trạng Thái 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Quay Lại", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
