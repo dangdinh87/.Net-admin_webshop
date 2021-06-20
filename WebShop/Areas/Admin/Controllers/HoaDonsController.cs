@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MyLibary.Model;
+using ModelEF.Model;
 
 namespace WebShop.Areas.Admin.Controllers
 {
     public class HoaDonsController : Controller
     {
-        private WebShopDBContext db = new WebShopDBContext();
+        private Model1 db = new Model1();
 
         // GET: Admin/HoaDons
         public ActionResult Index()
         {
-            return View(db.HoaDons.ToList());
+            var hoaDons = db.HoaDons.Include(h => h.NguoiDung);
+            return View(hoaDons.ToList());
         }
 
         // GET: Admin/HoaDons/Details/5
@@ -38,6 +39,7 @@ namespace WebShop.Areas.Admin.Controllers
         // GET: Admin/HoaDons/Create
         public ActionResult Create()
         {
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "id", "TenNV");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace WebShop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,NgayMua,KhachHang_Id")] HoaDon hoaDon)
+        public ActionResult Create([Bind(Include = "id,NgayMua,NguoiDung_Id")] HoaDon hoaDon)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace WebShop.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "id", "TenNV", hoaDon.NguoiDung_Id);
             return View(hoaDon);
         }
 
@@ -70,6 +73,7 @@ namespace WebShop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "id", "TenNV", hoaDon.NguoiDung_Id);
             return View(hoaDon);
         }
 
@@ -78,7 +82,7 @@ namespace WebShop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,NgayMua,KhachHang_Id")] HoaDon hoaDon)
+        public ActionResult Edit([Bind(Include = "id,NgayMua,NguoiDung_Id")] HoaDon hoaDon)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace WebShop.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "id", "TenNV", hoaDon.NguoiDung_Id);
             return View(hoaDon);
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModelEF.Model;
+using ModelEF.ModelDAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,20 +12,10 @@ namespace WebShop.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            var danhmucDAO = new DanhMucDAO();
+            var sanphamDAO = new SanPhamDAO();
+            ViewBag.ListSanPham = sanphamDAO.listSanPham();
+            ViewBag.ListDanhMuc = danhmucDAO.listDanhMuc();
             return View();
         }
     }

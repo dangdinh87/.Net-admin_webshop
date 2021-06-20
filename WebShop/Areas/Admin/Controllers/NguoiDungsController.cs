@@ -6,25 +6,32 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MyLibary.Model;
+using PagedList;
+using ModelEF.Model;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class NguoiDungsController : BaseController
+    public class NguoiDungsController : Controller
     {
-        private WebShopDBContext db = new WebShopDBContext();
+        private Model1 db = new Model1();
 
         // GET: Admin/NguoiDungs
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, int? page)
         {
             ViewBag.searchString = searchString;
-            if (searchString == null)
-            {
-                var sanPhams = db.NguoiDungs.ToList();
-                return View(sanPhams);
-            }
-            var sanPham = db.NguoiDungs.ToList().Where(x => x.TenNV.Contains(searchString));
+            var sanPham = db.NguoiDungs.Where(x => x.Username.Contains(searchString) || searchString == null).ToList().ToPagedList(page ?? 1, 5);
             return View(sanPham);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string id)
+        {
+            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
+            db.NguoiDungs.Remove(nguoiDung);
+            db.SaveChanges();
+            return View(nguoiDung);
         }
 
         // GET: Admin/NguoiDungs/Details/5
@@ -53,7 +60,7 @@ namespace WebShop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,TenNV,Email,DiaChi,SoDienThoai,Quyen,Username,Password")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "id,TenNV,Email,DiaChi,SoDienThoai,Quyen,Username,Password,status")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +92,7 @@ namespace WebShop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,TenNV,Email,DiaChi,SoDienThoai,Quyen,Username,Password")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "id,TenNV,Email,DiaChi,SoDienThoai,Quyen,Username,Password,status")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -97,30 +104,19 @@ namespace WebShop.Areas.Admin.Controllers
         }
 
         // GET: Admin/NguoiDungs/Delete/5
+ 
+
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nguoiDung);
+                NguoiDung nguoiDung = db.NguoiDungs.Find(id);
+                db.NguoiDungs.Remove(nguoiDung);
+                db.SaveChanges();
+                 return Redirect("~/Admin/Nguoidungs/Index");
+
         }
 
         // POST: Admin/NguoiDungs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            db.NguoiDungs.Remove(nguoiDung);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -1,10 +1,10 @@
-﻿using MyLibary.DAO;
+﻿using ModelEF.ModelDAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MyLibary.Model;
+using ModelEF   .Model;
 
 namespace WebShop.Areas.Admin.Controllers
 {
@@ -23,20 +23,25 @@ namespace WebShop.Areas.Admin.Controllers
         {
             var error = "";
             String user = filed["username"];
-            //String pass = MyString.ToMD5(filed["password"]);
             String pass = filed["password"];
             NguoiDung user_row = user_DAO.getRow(user);
-            if (user_row != null)
+            if (user_row != null && user_row.Quyen == 1)
             {
-                if (user_row.Password.Equals(pass))
+                if (user_row.status == true)
                 {
-                    Session["UserAdmin"] = user_row.TenNV;
-                    return RedirectToAction("Index", "Dashboard");
-                }
-                else
+                        if (user_row.Password.Equals(pass)) {
+                            Session["UserAdmin"] = user_row.TenNV;
+                            return RedirectToAction("Index", "Dashboard");
+                        }
+                        else
+                        {
+                            error = "Mật khẩu không chính xác";
+                        }                 
+                }    
+                    else             
                 {
-                    error = "Mật khẩu không chính xác";
-                }
+                    error = "Tài khoản bạn đã bị khóa";
+                } 
             }
             else
             {

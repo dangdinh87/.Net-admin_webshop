@@ -1,14 +1,14 @@
-﻿@model MyLibary.Model.NguoiDung
+﻿@model ModelEF.Model.NguoiDung
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Thông tin chi tiết</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Người Dùng</h4>
+    <h4>NguoiDung</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -67,9 +67,17 @@
             @Html.DisplayFor(model => model.Password)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Quay Lại", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
